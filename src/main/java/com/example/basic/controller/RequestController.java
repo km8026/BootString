@@ -1,5 +1,6 @@
 package com.example.basic.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.basic.model.Emp;
@@ -22,15 +24,23 @@ public class RequestController {
   @Autowired
   JdbcTemplate jt;
 
+  
   @GetMapping("req/path/{path1}/{path2}")
-public String path(
-@PathVariable("path1") String path1,
-@PathVariable("path2") String path2) {
-return path1 + ", " + path2;
-}
+  public String path(
+    @PathVariable("path1") String path1,
+    @PathVariable("path2") String path2) {
+      return path1 + ", " + path2;
+      }
+      
+      @GetMapping("req/data")
+      public Map<String, String> reqData(
+        @RequestParam Map<String, String> map
+      ) {
+        return map;
+      }
 
-@GetMapping("req/emp2")
-public List<Map<String, Object>> reqEmp2(
+      @GetMapping("req/emp2")
+      public List<Map<String, Object>> reqEmp2(
   @ModelAttribute("emp") Emp emp
   ){
   int pageNum = Integer.parseInt(emp.getPage()) * 5 - 5; // 문자를 숫자로 변환
