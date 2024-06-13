@@ -1,14 +1,30 @@
 package com.example.basic.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.Map;
 
-@RestController
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
 public class MethodController {
-  @PostMapping("req/post")
+  @PostMapping("req/post2")
   public String post() {
   return "POST";
   }
-}  
 
+@GetMapping("req/signup")
+public String signup() {
+  return "signup";
+}
 
+@PostMapping("req/signup")
+@ResponseBody
+public Map<String, Object> signupPost(
+  @RequestBody Map<String, Object> map) {
+    return map;
+  }
+
+  }  

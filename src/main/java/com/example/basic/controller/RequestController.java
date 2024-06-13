@@ -8,14 +8,18 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.basic.model.Emp;
+import com.example.basic.model.Json;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -31,6 +35,28 @@ public class RequestController {
     @PathVariable("path2") String path2) {
       return path1 + ", " + path2;
       }
+      
+      @CrossOrigin
+      @GetMapping("req/get")
+      public Map<String, String> reqGet(
+        @RequestParam Map<String, String> map
+      ) {
+        return map;
+      }
+      @CrossOrigin
+      @PostMapping("req/post")
+      public Map<String, String> reqPost(
+        @RequestParam Map<String, String> map
+      ) {
+        return map;
+      }
+      @CrossOrigin
+      @PostMapping("req/json")
+      public Json reqJson(@RequestBody Json json){
+          return json;
+
+        }
+      
       
       @GetMapping("req/data")
       public Map<String, String> reqData(
