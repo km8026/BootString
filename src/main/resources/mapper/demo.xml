@@ -5,4 +5,8 @@
 <select id="select" resultType="java.util.Map">
 select * from demo
 </select>
+<insert id="insert">
+insert into demo
+ values (#{seq}, #{user})
+</insert>
 </mapper>
