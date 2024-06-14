@@ -1,19 +1,23 @@
 package com.example.basic.entity;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity
 @Data
 public class Demo2 {
-  @Id
+  @Id @GeneratedValue
   long seq;
-  String user3;
-  int age;
+  @Column(name="username", length =10, nullable = false)
+  String userName;
+  int userAge;
+  String user2;
+  int age;;
   Date date1;
-  LocalDateTime date2;
+  Date date2;
 }

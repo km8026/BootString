@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.basic.dao.DemoDao;
+import com.example.basic.entity.TableExam1;
 import com.example.basic.mapper.DemoMapper;
 import com.example.basic.mapper.EmpMapper;
+import com.example.basic.repository.TableExam1Repository;
 
 
 
@@ -19,6 +21,18 @@ import com.example.basic.mapper.EmpMapper;
 
 @RestController
 public class DBController {
+  @Autowired
+  TableExam1Repository tableExam1Repository;
+
+  @GetMapping("/table1/add")
+  public String table1Add(@RequestParam String title){
+    TableExam1 t1 = new TableExam1();
+    // t1.setId(1);
+    t1.setTitle(title);
+    tableExam1Repository.save(t1);
+    return "입력 완료";
+  }
+
   @Autowired
   DemoDao demoDao;
 
