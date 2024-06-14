@@ -32,13 +32,14 @@ import com.example.basic.repository.MajorRepository;
 public class DBController {
   @Autowired
   HospitalRepository hospitalRepository;
-  @GetMapping("hospital")
+  @GetMapping("/hospital")
   public List<Hospital> hospitalList(){
     return hospitalRepository.findAll();
   }
 
   @Autowired
   MajorRepository majorRepository;
+  
   @GetMapping("/major/add")
   public Major majorAdd(@ModelAttribute Major major) {
     major.setEbtbDate(new Date());
