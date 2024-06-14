@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,17 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.basic.dao.DemoDao;
 import com.example.basic.entity.ServiceCenter;
 import com.example.basic.entity.TableExam1;
+import com.example.basic.entity.Hospital;
 import com.example.basic.entity.Major;
 import com.example.basic.mapper.DemoMapper;
 import com.example.basic.mapper.EmpMapper;
 import com.example.basic.repository.ServiceCenterRepository;
 import com.example.basic.repository.TableExam1Repository;
+import com.example.basic.repository.HospitalRepository;
 import com.example.basic.repository.MajorRepository;
 
 
 
 @RestController
 public class DBController {
+  @Autowired
+  HospitalRepository hospitalRepository;
+  @GetMapping("hospital")
+  public List<Hospital> hospitalList(){
+    return hospitalRepository.findAll();
+  }
 
   @Autowired
   MajorRepository majorRepository;
@@ -83,12 +90,12 @@ public class DBController {
   return "삭제 완료";
   }
 
-  @GetMapping("/sc/delete")
-  @ResponseBody
-  public String scRemove(@RequestParam Integer id) {
-    serviceCenterRepository.deleteById(id);
-    return "삭제 완료";
-  }
+  // @GetMapping("/sc/delete")
+  // @ResponseBody
+  // public String scRemove(@RequestParam Integer id) {
+  //   serviceCenterRepository.deleteById(id);
+  //   return "삭제 완료";
+  // }
   
 
   @Autowired
