@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class major {
+public class Major {
   @Id @GeneratedValue
   Integer id;
   @Column (length = 255, nullable = true)
