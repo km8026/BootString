@@ -15,6 +15,6 @@ public class Team {
   int teamId;
   String teamName;
 
-  @OneToMany(mappedBy = "team")
+  @OneToMany(mappedBy = "team") // 변수명을 연결
   List<Player> players = new ArrayList<>();
 }
