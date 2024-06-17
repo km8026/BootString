@@ -24,7 +24,23 @@ public class EmpRepositoryTests {
     List<Emp> list = empRepository.findAll();
     System.out.println(list);
   }
-
+  @Test 
+  void Emp조회2(){
+    Emp e = empRepository.findByENAME("scott");
+    System.out.println(e);
+  }
+  @Test 
+  void Emp조회3(){
+    String ename = "tt";
+    Emp e = empRepository.findByENAMELike("%" + ename + "%");
+    System.out.println(e);
+  }
+  @Test 
+  void Emp조회4(){
+    List<Emp> e = empRepository.findBySALGreaterThan(2000);
+    System.out.println(e);
+  }
+  
   @Test
   void dept_조회() {
     List<Dept> list = deptRepository.findAll();
