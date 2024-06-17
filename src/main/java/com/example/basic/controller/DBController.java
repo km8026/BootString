@@ -17,19 +17,61 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.basic.dao.DemoDao;
 import com.example.basic.entity.ServiceCenter;
 import com.example.basic.entity.TableExam1;
+import com.example.basic.entity.Team;
+import com.example.basic.entity.Dept;
+import com.example.basic.entity.Emp;
 import com.example.basic.entity.Hospital;
 import com.example.basic.entity.Major;
+import com.example.basic.entity.Player;
 import com.example.basic.mapper.DemoMapper;
 import com.example.basic.mapper.EmpMapper;
 import com.example.basic.repository.ServiceCenterRepository;
 import com.example.basic.repository.TableExam1Repository;
+import com.example.basic.repository.TeamRepository;
+import com.example.basic.repository.DeptRepository;
+import com.example.basic.repository.EmpRepository;
 import com.example.basic.repository.HospitalRepository;
 import com.example.basic.repository.MajorRepository;
+import com.example.basic.repository.PlayerRepository;
 
 
 
 @RestController
 public class DBController {
+  @Autowired
+  EmpRepository empRepository;
+
+  @Autowired
+  DeptRepository deptRepository;
+
+  @GetMapping("/emp")
+  public List<Emp> emp() {
+    List<Emp> list = empRepository.findAll();
+    return list;
+  }
+
+  @GetMapping("/dept")
+  public List<Dept> dept() {
+    List<Dept> list = deptRepository.findAll();
+    return list;
+  }
+
+  @Autowired
+  TeamRepository teamRepository;
+
+  @Autowired
+  PlayerRepository playerRepository;
+
+  @GetMapping("/team")
+  public List<Team> team() {
+    return teamRepository.findAll();
+  }
+  
+  @GetMapping("/player")
+  public List<Player> player() {
+    return playerRepository.findAll();
+  }
+
   @Autowired
   HospitalRepository hospitalRepository;
   

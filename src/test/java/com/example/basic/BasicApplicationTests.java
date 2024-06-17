@@ -1,7 +1,6 @@
 package com.example.basic;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -29,11 +28,12 @@ class BasicApplicationTests {
 	Optional<Team> opt = teamRepository.findById(1);
 		if(opt.isPresent()){
 			Team team = opt.get();
-			System.out.println(team.getTeamName());
-			List<Player> players = team.getPlayers();
-			for(Player p : players){
-				System.out.println(p.getPlayerName());
-			}
+			System.out.println(team);
+			// System.out.println(team.getTeamName());
+			// List<Player> players = team.getPlayers();
+			// for(Player p : players){
+			// 	System.out.println(p.getPlayerName());
+			// }
 		}
 	}
 	@Test
@@ -44,7 +44,7 @@ class BasicApplicationTests {
 		teamRepository.save(t); 
 	}
 
-	@Test
+	@Test @Transactional
 	void PlayerRepository조회Test(){
 	Optional<Player>	opt = playerRepository.findById(2); // select 한번
 		if(opt.isPresent()){
@@ -75,7 +75,7 @@ class BasicApplicationTests {
 		Major major = new Major();
 		major.setName("아무거나");
 		major.setEbtbDate(new Date());
-		major.setMax_prsn(30);
+		major.setMaxPrsn(30);
 		majorRepository.save(major);
 	}
 
