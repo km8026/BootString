@@ -32,6 +32,7 @@ import com.example.basic.repository.MajorRepository;
 public class DBController {
   @Autowired
   HospitalRepository hospitalRepository;
+  
   @GetMapping("/hospital")
   public List<Hospital> hospitalList(){
     return hospitalRepository.findAll();

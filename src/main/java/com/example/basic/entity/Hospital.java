@@ -1,13 +1,10 @@
 package com.example.basic.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
-
-
 
 @Entity
 @Data
@@ -21,10 +18,8 @@ public class Hospital {
   @Column (length = 50, nullable = false)
   String name;
 
-  @Column(name = "medical", nullable = false)
   Integer medical;
 
-  @Column(name = "room", nullable = false)
   Integer room;
 
   @Column (length = 15, nullable = false)
@@ -32,6 +27,4 @@ public class Hospital {
 
   @Column (length = 100, nullable = false)
   String address;
-  
- 
 }
