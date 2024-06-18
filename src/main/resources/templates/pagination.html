@@ -1,0 +1,17 @@
+<style>
+  .active {
+    background-color: aqua;
+  }
+</style>
+<a th:if="${page > 10}" th:href="@{|/pagination?page=${page - 10}|}" th:text="[이전]"></a>
+<!-- th:block 아무 의미는 없음 div사용해도됨 block안에 반복을 하고 싶을때 사용 -->
+<th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+          <!--변수 (암거나 지정) : 리스트 -->
+ <a th:if="${pageNumber != page}" th:href="@{|/pagination?page=${pageNumber}|}" 
+ th:text="${pageNumber}"></a>
+ 
+ <span th:unless="${pageNumber != page}" th:text="${pageNumber}" class="active"></span>
+</th:block>
+
+<a th:href="@{|/pagination?page=${page + 10}|}" th:text="[다음]"></a>
+
