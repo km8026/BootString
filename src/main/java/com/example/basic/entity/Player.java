@@ -18,7 +18,7 @@ public class Player {
   int playerId;
   String playerName;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)// 원하는 부분
   @JoinColumn(name="team_id")
   @JsonIgnore // Json으로 만들어 질때 Team은 출력하지 않음
   Team team;

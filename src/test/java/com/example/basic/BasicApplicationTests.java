@@ -23,7 +23,7 @@ class BasicApplicationTests {
 	@Autowired
 	TeamRepository teamRepository;
 
-	@Test @Transactional
+	@Test @Transactional  // lazy 사용시 Transactional 사용하면 원하는 부분 + 나머지 전체부분 보여줌
 	void TeamRepository조회Test(){
 	Optional<Team> opt = teamRepository.findById(1);
 		if(opt.isPresent()){

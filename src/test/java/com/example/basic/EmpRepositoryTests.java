@@ -27,7 +27,7 @@ public class EmpRepositoryTests {
   @Test 
   void Emp조회2(){
     Emp e = empRepository.findByENAME("scott");
-    System.out.println(e);
+    System.out.println(e);  
   }
   @Test 
   void Emp조회3(){
