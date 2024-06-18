@@ -24,6 +24,7 @@ public class ThymeleafController {
   public String hospi(Model model){
     List<Hospital> hospitals= hospitalRepository.findAll();
     model.addAttribute("hospitals", hospitals);
+                       // hospitals 와 html안에 변수명 동일
     return "hospital";
   }
 
