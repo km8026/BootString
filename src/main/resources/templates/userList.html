@@ -1,0 +1,26 @@
+<table border="1">
+  <!-- 테두리 -->
+  <tr>
+    <td>아이디</td>
+    <td>이름</td>
+    <td>나이</td>
+  </tr>
+  <tr th:each="user : ${userList}">
+    <td th:text="${user.userId}"></td>
+    <td th:text="${user.userName}"></td>
+    <td th:text="${user.userAge}"></td>
+  </tr>
+</table>
+<hr>
+<span th:each="num : ${#numbers.sequence(1,10)}">[[ ${num}]]</span><br>
+
+<th:block th:each="pageNumber : ${#numbers.sequence(1, 10)}">
+  <!-- #numbers.sequence(1, 10) 타임리프에서 제공하는 함수
+       #Date.sequence() 사용가능 -->
+  <span th:text="${pageNumber}"></span>
+</th:block>
+
+<ul>
+  <li th:each="x : ${userList}">[[${x.userName}]]</li>
+  <!-- 임의의 변수 x  userList에서 userName 가져옴 -->
+</ul>

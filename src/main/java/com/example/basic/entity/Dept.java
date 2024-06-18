@@ -20,7 +20,7 @@ import lombok.ToString;
 public class Dept {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Integer DEPTNO;
+  Byte DEPTNO;
 
   @Column(length = 14,nullable = true)
   String DNAME;

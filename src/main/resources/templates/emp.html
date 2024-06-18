@@ -1,0 +1,12 @@
+<table border="2">
+<tr>
+  <td>사원번호</td>
+  <td>이름</td>
+  <td>부서</td>
+</tr>
+  <tr th:each="emp : ${empList}">
+    <td th:text="${emp.EMPNO}"></td>
+    <td th:text="${emp.ENAME}"></td>
+    <td th:text="${emp.dept.DNAME}"></td>
+  </tr>
+</table>
