@@ -1,5 +1,8 @@
 package com.example.basic;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -17,49 +20,66 @@ import com.example.basic.repository.TeamRepository;
 
 @SpringBootTest
 class BasicApplicationTests {
+	@Test
+	void 암호화() throws NoSuchAlgorithmException {
+		String raw = "password1234";
+		String rawAndSalt = "abcd1234";
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+		md.update(raw.getBytes());
+		String hex = String.format("%064x", new BigInteger(1, md.digest()));
+		System.out.println("raw의 해시값 : " + hex);
+		md.update(rawAndSalt.getBytes());
+		hex = String.format("%064x", new BigInteger(1, md.digest()));
+		System.out.println("raw+salt의 해시값 : " + hex);
+	}
+
 	@Autowired
 	PlayerRepository playerRepository;
 
 	@Autowired
 	TeamRepository teamRepository;
 
-	@Test @Transactional  // lazy 사용시 Transactional 사용하면 원하는 부분 + 나머지 전체부분 보여줌
-	void TeamRepository조회Test(){
-	Optional<Team> opt = teamRepository.findById(1);
-		if(opt.isPresent()){
+	@Test
+	@Transactional // lazy 사용시 Transactional 사용하면 원하는 부분 + 나머지 전체부분 보여줌
+	void TeamRepository조회Test() {
+		Optional<Team> opt = teamRepository.findById(1);
+		if (opt.isPresent()) {
 			Team team = opt.get();
 			System.out.println(team);
 			// System.out.println(team.getTeamName());
 			// List<Player> players = team.getPlayers();
 			// for(Player p : players){
-			// 	System.out.println(p.getPlayerName());
+			// System.out.println(p.getPlayerName());
 			// }
 		}
 	}
+
 	@Test
-	void TeamRepositoryTest(){
+	void TeamRepositoryTest() {
 		Team t = new Team();
 		t.setTeamId(1);
 		t.setTeamName("A팀");
-		teamRepository.save(t); 
+		teamRepository.save(t);
 	}
 
-	@Test @Transactional
-	void PlayerRepository조회Test(){
-	Optional<Player>	opt = playerRepository.findById(2); // select 한번
-		if(opt.isPresent()){
+	@Test
+	@Transactional
+	void PlayerRepository조회Test() {
+		Optional<Player> opt = playerRepository.findById(2); // select 한번
+		if (opt.isPresent()) {
 			Player p = opt.get();
 			System.out.println(p.getPlayerName());
-			Team t = p.getTeam(); //select 두번
+			Team t = p.getTeam(); // select 두번
 			System.out.println(t.getTeamName());
 		}
 	}
 
 	@Test
-	void PlayerRepositoryTest(){
+	void PlayerRepositoryTest() {
 		Team team = new Team();
 		team.setTeamId(1);
-		
+
 		Player p = new Player();
 		p.setPlayerId(2);
 		p.setPlayerName("회원2");

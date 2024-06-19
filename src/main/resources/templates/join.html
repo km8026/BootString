@@ -1,0 +1,31 @@
+<form action="/join" method="post">
+  ID : <input type="text" name="userId"><br>
+  PW : <input type="password" name="userPw"><br>
+  <input type="submit" value="회원가입">
+</form>
+<script>
+  const submit = document.querySelector("[type = submit]");
+  const userId = document.querySelector("[name = userId]");
+  submit.addEventListener('click', (e) => {
+    e.preventDefault(); // 기본 기능 차단
+    const id = userId.value;
+    // 4글자 이상, 한글 불가
+    const regex1 = /[a-z]{4,}/;
+    const cond1 = regex1.test(id);
+    // const regex2 = /[가-힣]+/g; 
+    // const cond2 = regex2.test(id); 
+
+    // 한글을 사용했을 때 값이 출력
+    
+    const cond2 = id.match(/[가-힣]+/g);
+
+    if(cond1 && !cond2){
+      alert('회원가입 동작');
+      document.querySelector('form').submit();
+    }else {
+      alert('ID 다시');
+    }
+    // alert(cond1 + " " +cond2);
+  });
+
+</script>
