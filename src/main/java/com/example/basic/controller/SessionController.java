@@ -46,6 +46,7 @@ public class SessionController {
   public String joinpost(UserModel user){
     User a = new User(); // 생성
     a.setUserId(user.getUserId()); // 빼서 넣는다 
+    
     String encodedPw = ecUtil.encode(user.getUserPw());
     a.setUserPw(encodedPw);
     
@@ -74,7 +75,9 @@ public class SessionController {
 
   @PostMapping("/login")
   public String loginPost(UserModel user, HttpSession session) {
-    com.example.basic.entity.User dbUser = userRepository.findByUserIdAndUserPw(user.getUserId(), user.getUserPw());
+    String encodedPw = ecUtil.encode(user.getUserPw());
+    User dbUser = userRepository.findByUserIdAndUserPw(user.getUserId(), encodedPw);
+
     session.setAttribute("user", user);
     if (dbUser == null) {
       return "redirect:/login";
