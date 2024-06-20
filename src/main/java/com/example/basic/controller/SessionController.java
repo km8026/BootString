@@ -1,9 +1,14 @@
 package com.example.basic.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.basic.entity.Board;
 import com.example.basic.entity.User;
@@ -74,17 +79,22 @@ public class SessionController {
   }
 
   @PostMapping("/login")
-  public String loginPost(UserModel user, HttpSession session) {
-    String encodedPw = ecUtil.encode(user.getUserPw());
-    User dbUser = userRepository.findByUserIdAndUserPw(user.getUserId(), encodedPw);
+  @ResponseBody
+  public Map<String,Object> loginPost(@RequestBody UserModel user, HttpSession session) {
+    
+    Map<String,Object> map = new HashMap<>();
 
-    session.setAttribute("user", user);
+    String encodedPw = ecUtil.encode(user.getUserPw());
+    
+    User dbUser = userRepository.findByUserIdAndUserPw(user.getUserId(), encodedPw);
     if (dbUser == null) {
-      return "redirect:/login";
+      map.put("msg", "ID 또는 PW를 확인");
+      return map;
     }
 
     session.setAttribute("user", user);
-    return "redirect:/main";
+    map.put("msg", "로그인되었습니다.");
+    return map;
   }
 
   @GetMapping("/logout")

@@ -3,3 +3,26 @@
   PW : <input type="password" name="userPw"><br>
   <input type="submit" value="로그인">
 </form>
+<script>
+  const submit = document.querySelector('[type=submit]');
+  const id = document.querySelector('[name=userId]');
+  const pw = document.querySelector('[name=userPw]');
+  
+  submit.addEventListener('click', async(e)=>{
+    e.preventDefault();
+    // 기본기능 막아줌 <input type="submit" value="로그인">
+    
+    const obj ={'userId': id.value, 'userPw': pw.value} // 자바는 객체 형태로 만듬
+    const json = JSON.stringify(obj); // json 방식 문자열
+    const url = '/login';
+    // json 방법 fetch 사용 앞에 await 사용시 async 써야함 
+    const res = await fetch(url,{    // 주소와 객체
+      method: 'post',
+      headers: {'Content-type': 'application/json'},
+      body: json
+    });
+    const data = await res.json(); // res.text();
+    alert(data.msg);
+    // await 파싱
+  });
+</script>

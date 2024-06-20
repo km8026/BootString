@@ -20,6 +20,14 @@ import com.example.basic.repository.TeamRepository;
 
 @SpringBootTest
 class BasicApplicationTests {
+
+	// @Autowired PasswordEncoder passwordEncoder;
+	// @Test
+	// void 스프링암호화(){
+	// 	String pw  = passwordEncoder.encode("1");
+	// 	System.out.println(pw);
+	// }
+
 	@Test
 	void 암호화() throws NoSuchAlgorithmException {
 		String raw = "password1234";
