@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +23,30 @@ import com.example.basic.repository.HospitalRepository;
 
 @Controller
 public class ThymeleafController {
+
+  @GetMapping("/shospital") // 이름이 중복되면 안됨
+  public String hospital(Model model, @RequestParam(defaultValue = "1") int page) {
+    int startPage = (page - 1) / 10 * 10 + 1;
+    int endPage = startPage + 9;
+
+    Order ord1 = Order.asc("sido");
+    Order ord2 = Order.desc("name");
+    Sort sort = Sort.by(ord1, ord2);
+    Pageable pageable = PageRequest.of(page - 1, 10, sort);
+    Page<Hospital> p = hospitalRepository.findAll(pageable);
+    
+    int totalPage = p.getTotalPages();
+    if (endPage > totalPage) endPage = totalPage;
+
+    model.addAttribute("hospitals", p.getContent());
+    
+    model.addAttribute("startPage", startPage);
+    model.addAttribute("endPage", endPage);
+    model.addAttribute("totalPage", totalPage);
+    // hospital.html -> ${hospitals} 변수명과 같음
+    return "hospital";
+
+  }
 
   @GetMapping("insert1")
   public String insert1() {

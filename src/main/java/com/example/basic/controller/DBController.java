@@ -2,11 +2,15 @@ package com.example.basic.controller;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,9 +49,24 @@ public class DBController {
   DeptRepository deptRepository;
 
   @GetMapping("/emp")
-  public List<Emp> emp() {
-    List<Emp> list = empRepository.findAll();
-    return list;
+  public Map<String, Object> emp(
+    @RequestParam(defaultValue = "1") int page
+  ) {
+    Map<String, Object> map = new HashMap<>();
+    //데이터 3개만 + 정렬
+    Sort sort = Sort.by("SAL"); // 급여순
+    Pageable pageable = PageRequest.of(page - 1, 3, sort);
+    
+    // Page<Emp> p = empRepository.findAll(pageable);
+    // List<Emp> list = p.getContent();
+    
+    List<Emp> list = empRepository.findByENAMELikeOrderByENAMEAsc("%a%", pageable);
+    
+    map.put("emp_list",list);
+    // map.put("total_page",p.getTotalPages());
+    // map.put("total_count",p.getTotalElements());
+    map.put("page",page);
+    return map;
   }
 
   @GetMapping("/dept")
