@@ -20,20 +20,19 @@ import com.example.basic.entity.Emp;
 import com.example.basic.entity.Hospital;
 import com.example.basic.repository.EmpRepository;
 import com.example.basic.repository.HospitalRepository;
+import com.example.basic.service.HospitalService;
 
 @Controller
 public class ThymeleafController {
-
+  @Autowired
+  HospitalService hospitalService;
+  
   @GetMapping("/shospital") // 이름이 중복되면 안됨
   public String hospital(Model model, @RequestParam(defaultValue = "1") int page) {
     int startPage = (page - 1) / 10 * 10 + 1;
     int endPage = startPage + 9;
 
-    Order ord1 = Order.asc("sido");
-    Order ord2 = Order.desc("name");
-    Sort sort = Sort.by(ord1, ord2);
-    Pageable pageable = PageRequest.of(page - 1, 10, sort);
-    Page<Hospital> p = hospitalRepository.findAll(pageable);
+    Page<Hospital> p = hospitalService.getList(page);
     
     int totalPage = p.getTotalPages();
     if (endPage > totalPage) endPage = totalPage;

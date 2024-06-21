@@ -32,6 +32,7 @@ import com.example.basic.mapper.EmpMapper;
 import com.example.basic.repository.ServiceCenterRepository;
 import com.example.basic.repository.TableExam1Repository;
 import com.example.basic.repository.TeamRepository;
+import com.example.basic.service.HospitalService;
 import com.example.basic.repository.DeptRepository;
 import com.example.basic.repository.EmpRepository;
 import com.example.basic.repository.HospitalRepository;
@@ -94,9 +95,13 @@ public class DBController {
   @Autowired
   HospitalRepository hospitalRepository;
   
+  @Autowired
+  HospitalService hospitalService;
+
   @GetMapping("/hospital")
   public List<Hospital> hospitalList(){
-    return hospitalRepository.findAll();
+    List<Hospital> list = hospitalService.getJson();
+    return list;
   }
 
   @Autowired

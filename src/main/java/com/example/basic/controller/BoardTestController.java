@@ -20,12 +20,12 @@ import com.example.basic.repository.BoardTestRepository;
 public class BoardTestController {
  @Autowired BoardTestRepository boardTestRepository;
  @Autowired BoardFileTestRepository boardFileTestRepository;
-//AOP를 기반으로 동작 트랜잭션을 시작하고, 커밋하거나 롤백하는 코드를 명시적으로 작성할 필요 없이, 
+//AOP를 기반으로 동작 트랜잭션을 시작하고, 커밋하거나 롤백하는 코드를 작성할 필요 없이
 // 스프링이 자동으로 트랜잭션 경계를 관리
  @Transactional(
   rollbackFor = {Exception.class, IOException.class} // 속성은 특정 예외가 발생했을 때 트랜잭션을 롤백
   //Exception이나 IOException 같은 체크 예외는 기본적으로 롤백되지 않기 때문에 
-  //rollbackFor 속성으로 롤백을 명시적으로 지정
+  //rollbackFor 속성으로 롤백을 지정
  )
  @GetMapping("/board_test")
  public String boardTest(@ModelAttribute BoardTest board) throws Exception {
