@@ -17,9 +17,23 @@ import com.example.basic.entity.Team;
 import com.example.basic.repository.MajorRepository;
 import com.example.basic.repository.PlayerRepository;
 import com.example.basic.repository.TeamRepository;
+import com.example.basic.util.Mailer;
+import com.example.basic.util.SMTPAuthenticator;
 
 @SpringBootTest
 class BasicApplicationTests {
+	@Autowired
+	Mailer mailer;
+
+	@Test
+	void emailsend(){
+		for(int i = 0; i<100; i++){
+		mailer.sendMail(
+				"dugyeon@gmail.com", "차단해봐라", "ㅋㅋㅋㅋ..ㅋㅋ", new SMTPAuthenticator());
+				
+			}
+
+	}
 
 	// @Autowired PasswordEncoder passwordEncoder;
 	// @Test
