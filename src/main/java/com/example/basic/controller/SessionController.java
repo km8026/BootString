@@ -107,14 +107,14 @@ public class SessionController {
   // main 로그인 상태여야 오류X
   @GetMapping("/main")
   public String main(HttpSession session) {
-    // 형 변환
-    UserModel u = (UserModel) session.getAttribute("user");
-    if (u == null) {
-      return "redirect:/login"; // 로그인 페이지로 리다이렉트
-    }
-    String id = u.getUserId();
-    String pw = u.getUserPw();
-    System.out.println(id + ", " + pw);
+    // // 형 변환
+    // UserModel u = (UserModel) session.getAttribute("user");
+    // if (u == null) {
+    //   return "redirect:/login"; // 로그인 페이지로 리다이렉트
+    // }
+    // String id = u.getUserId();
+    // String pw = u.getUserPw();
+    // System.out.println(id + ", " + pw);
     return "main";
   }
 
