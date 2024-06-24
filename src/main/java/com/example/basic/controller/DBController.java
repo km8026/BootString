@@ -101,6 +101,7 @@ public class DBController {
   @GetMapping("/hospital")
   public List<Hospital> hospitalList(){
     List<Hospital> list = hospitalService.getJson();
+    // System.out.println(2/0); // 오류 발생 Aspect
     return list;
   }
 
